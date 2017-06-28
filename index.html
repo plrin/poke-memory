@@ -13,43 +13,114 @@
 </head>
 
 <body>
-  <div id="some-element">
-  </div>
 
-  <div>
-    <button id="generate">
-      generate new puzzle
-    </button>
-  </div>
-
-  <div class="keyboard">
-    <div class="keyboard__key-wrapper">
-      <button class="keyboard__sound-key">
-        play sound
-      </button>
-      <button class="keyboard__add-key" data-number="1">
-        add this sound (1)
-      </button>
-    </div>
-    <button class="keyboard__sound-key">
-        play sound
-      </button>
-      <button class="keyboard__add-key" data-number="2">
-        add this sound (2)
-      </button>
-    </div>
-
-    <button class="keyboard__reset">
+<div class="page-wrapper">
+  <div class="start">
+    <button class="start__button start__reset">
       reset
     </button>
-    <button class="keyboard__compare">
-      compare
+    <button id="generate" class="start__button start__start" data-state="start">
+      Start
+    </button>
+    <button class="start__button start__replay">
+      reload
     </button>
   </div>
 
-  <div class="solution">
-    <input class="solution__input" type="text" name="enter solution">
+  <div class="drop-zone">
+    <div class="drop-zone__wrapper">
+      <div class="drop-zone__text">Sound #1</div>
+      <div class="drop-zone__box"></div>
+    </div>
+    <div class="drop-zone__wrapper">
+      <div class="drop-zone__text">Sound #2</div>
+      <div class="drop-zone__box"></div>
+    </div>
+    <div class="drop-zone__wrapper">
+      <div class="drop-zone__text">Sound #3</div>
+      <div class="drop-zone__box"></div>
+    </div>
+    
   </div>
 
+  <div class="drag-zone">
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+    <div class="drag-zone__key-wrapper">
+      <div class="drag-zone__sound-key">
+        play sound
+      </div>
+      <div class="drag-zone__add-key" data-number="1">
+        add this sound (1)
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>
 </body>
 </html>

@@ -1,0 +1,142 @@
+// colors
+$green: #63B598;
+$red: #F8313A;
+$light-blue: #D7E9EF;
+$grey: #BBBBBB;
+$text-inactive: #BBB;
+$text-active: #232323;
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  // height: 100%;
+  // width: 100%;
+}
+
+button {
+  outline: 0;
+  border: none;
+}
+
+.page-wrapper {
+  width: 100%;
+  height: 100%;
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: white;
+  border: 1px solid black;
+}
+
+// -----------
+// start zone 
+// -----------
+
+.start {
+  width: 100%;
+  height: 120px;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.start__button {
+  border-radius: 50%;
+  color: white;
+  position: absolute;
+  cursor: pointer;
+}
+
+.start__start {
+  background-color: $green;
+  height: 100px;
+  width: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+}
+
+.start__replay {
+  background-color: $red;
+  height: 50px;
+  width: 50px;
+  top: 50%;
+  left: calc(50% + 80px);
+  transform: translate3d(-50%, -50%, 0);
+}
+
+
+// ----------
+// drop zone
+// ----------
+
+.drop-zone {
+  width: 100%;
+  text-align: center;
+  padding-bottom: 30px;
+  box-shadow: 0px 5px 5px -5px rgba(0,0,0,0.6);
+  position: relative;
+
+}
+
+.drop-zone__wrapper {
+  display: inline-block;
+  width: 32%;
+}
+
+.drop-zone__text {
+  color: $grey;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.drop-zone__box {
+  width: 100px;
+  height: 100px;
+  border-radius: 3px;
+  border: 1px solid $red;
+  margin: 0 auto;
+}
+
+.drop-zone--active {
+  .drop-zone__text {
+    color: $text-active;
+  }
+
+  .drop-zone__box {
+    border-width: 5px;
+  }
+}
+
+
+// ----------
+// drag zone
+// ----------
+
+.drag-zone {
+  width: 100%;
+  background-color: $light-blue;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+.drag-zone__key-wrapper {
+  display: inline-block;
+  width: 32%;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 25px; 
+
+}
+
+.drag-zone__sound-key {
+  margin: 0 auto;
+  width: 80px;
+  height: 80px;
+  background-color: white;
+}
+
+.drag-zone__add-key {
+  display: none;
+}
+
