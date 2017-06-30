@@ -12,9 +12,12 @@ var PokeApp = (function() {
     DOM.$addKey = $(".keyboard__add-key");
     DOM.$solutionInput = $(".solution__input");
     DOM.$resetButton = $(".keyboard__reset");
-    DOM.$compareButton = $(".keyboard__compare");
     DOM.$replayButton = $(".start__replay");
     DOM.$resetButton = $(".start__reset");
+    DOM.$dragKey = $(".drag-zone__sound-key");
+    DOM.$boxOne = $("#drop-zone__box-one");
+    DOM.$boxTwo = $("#drop-zone__box-two");
+    DOM.$boxThree = $("#drop-zone__box-three");
   }
 
   // bind events
@@ -22,8 +25,8 @@ var PokeApp = (function() {
     DOM.$generateButton.on("click", _onStartButton);
     DOM.$addKey.on("click", addToInput);
     DOM.$resetButton.on("click", _onResetButton);
-    DOM.$compareButton.on("click", compareInput);
     DOM.$replayButton.on("click", _onReplayButton);
+    DOM.$dragKey.on("click", _onDragKey);
   }
 
   // set element click function
@@ -43,6 +46,15 @@ var PokeApp = (function() {
 
   function _onResetButton() {
     generateMemory();
+    animateToOrigin();
+  }
+
+  function _onDragKey() {
+    var $this = $(this);
+
+    animateToDropbox($this);
+    setDragboxState();
+
   }
 
 
@@ -105,6 +117,84 @@ var PokeApp = (function() {
   function compareInput() {
     console.log("cur: " + curPuzzle);
     console.log("input: " + getInput());
+  }
+
+  function setDragboxState() {
+    if(!DOM.$boxOne.hasClass("check")) {
+      DOM.$boxOne.addClass("check");
+    }
+    else if(!DOM.$boxTwo.hasClass("check")) {
+      DOM.$boxTwo.addClass("check");
+    }
+    else if(!DOM.$boxThree.hasClass("check")) {
+      DOM.$boxThree.addClass("check");
+    }
+  }
+
+  // ---------------
+  // animation functions and stuff
+  // ---------------
+
+  function getDropPosition($el) {
+
+    var $curBox = null
+      , x = null
+      , y = null
+      , marginOffset = 10;
+
+    if(!DOM.$boxOne.hasClass("check")) {
+      $curBox = DOM.$boxOne;
+    }
+    else if(!DOM.$boxTwo.hasClass("check")) {
+      $curBox = DOM.$boxTwo;
+    }
+    else if(!DOM.$boxThree.hasClass("check")) {
+      $curBox = DOM.$boxThree;
+    }
+
+    if($curBox != null) {
+      x = $curBox.offset().left + marginOffset;
+      y = $curBox.offset().top + marginOffset;
+    } else {
+      // stay at origin
+      x = getDragPosition($el).x;
+      y = getDragPosition($el).y;
+    }
+    
+    return {"x": x, "y": y};
+  }
+
+  function getDragPosition($el) {
+    var x = $el.offset().left
+    , y = $el.offset().top;
+
+    return {"x": x, "y": y};
+  }
+
+  function calculateTransformDistance(startX, startY, endX, endY) {
+
+    var distX = endX - startX
+      , distY = endY - startY;
+
+    return {"x": distX, "y": distY};
+  }
+
+  function animateToDropbox($el) {
+
+    var res = calculateTransformDistance(
+              getDragPosition($el).x, 
+              getDragPosition($el).y, 
+              getDropPosition($el).x, 
+              getDropPosition($el).y);
+
+    var x = res.x
+      , y = res.y;
+    
+    TweenMax.to($el.get(), 1, { x: x, y: y, ease:Power1.easeInOut });
+  }
+
+  function animateToOrigin() {
+    TweenMax.to(DOM.$dragKey.get(), 1, { x: 0, y: 0, ease:Power1.easeInOut });
   }
 
 

@@ -3,7 +3,8 @@
 
 button {
   outline: 0;
-  border: none; }
+  border: none;
+  cursor: pointer; }
 
 .page-wrapper {
   width: 100%;
@@ -24,6 +25,14 @@ button {
   color: white;
   position: absolute;
   cursor: pointer; }
+
+.start__reset {
+  background-color: #f8313a;
+  height: 50px;
+  width: 50px;
+  top: 50%;
+  left: calc(50% - 80px);
+  transform: translate3d(-50%, -50%, 0); }
 
 .start__start {
   background-color: #63b598;
@@ -88,5 +97,8 @@ button {
   height: 80px;
   background-color: white; }
 
-.drag-zone__add-key {
-  display: none; }
+.drag-zone__play-key {
+  background-color: white;
+  border: 1px solid black;
+  width: 80px;
+  margin: 5px auto 0; }
