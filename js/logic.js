@@ -2,15 +2,13 @@ var PokeApp = (function() {
   'use strict';
   // placeholder for cached DOM elements
   var DOM = {}
-    , curPuzzle = [];
+    , curPuzzle = []
+    , userInput = [];
 
   /* =================== private methods ================= */
   // cache DOM elements
   function cacheDom() {
     DOM.$generateButton = $("#generate");
-    // DOM.$numberOfPuzzlesInput = $(".")
-    DOM.$addKey = $(".keyboard__add-key");
-    DOM.$solutionInput = $(".solution__input");
     DOM.$resetButton = $(".keyboard__reset");
     DOM.$replayButton = $(".start__replay");
     DOM.$resetButton = $(".start__reset");
@@ -19,15 +17,18 @@ var PokeApp = (function() {
     DOM.$boxTwo = $("#drop-zone__box-two");
     DOM.$boxThree = $("#drop-zone__box-three");
     DOM.$dropbox = $(".drop-zone__box");
+    DOM.$resultBox = $(".result-box");
+    DOM.$resultText = $(".result-box__text");
+    DOM.$resultClose = $(".result-box__close");
   }
 
   // bind events
   function bindEvents() {
     DOM.$generateButton.on("click", _onStartButton);
-    DOM.$addKey.on("click", addToInput);
     DOM.$resetButton.on("click", _onResetButton);
     DOM.$replayButton.on("click", _onReplayButton);
     DOM.$dragKey.on("click", _onDragKey);
+    DOM.$resultClose.on("click", _onResultClose);
   }
 
   // set element click function
@@ -37,7 +38,7 @@ var PokeApp = (function() {
       setCheckButton();
     }
     else {
-      compareInput();
+      showResult();
     }
   }
 
@@ -57,11 +58,30 @@ var PokeApp = (function() {
     if(curState == "check") {
       animateToDropbox($this);
       setDragboxState();
+      addToInput($this);
     }
+  }
+
+  function _onResultClose() {
+    DOM.$resultBox.hide();
   }
 
 
   // functions
+
+  function showResult() {
+
+    DOM.$resultText.removeClass("right wrong");
+
+    if(compareInput()) {
+      DOM.$resultText.addClass("right").text("ITZ REIT :))))");
+    } else {
+      DOM.$resultText.addClass("wrong").text("WONG :((((");
+    }
+
+    DOM.$resultBox.show();
+
+  }
 
   function resetGame() {
 
@@ -72,6 +92,7 @@ var PokeApp = (function() {
     }
 
     curPuzzle = [];
+    userInput = [];
   }
 
   function setCheckButton() {
@@ -89,35 +110,31 @@ var PokeApp = (function() {
 
   // extend this function with user input, to select the number of puzzles
   function generateMemory() {
-    // if(numberOfPuzzles == "undefined") {
-    //   numberOfPuzzles = 5;
-    // }
-
-    var min = 0
+    var min = 1
       , max = 5
-      , puzzleArray = []
       , numberOfPuzzles = 3;
-
-    for (var i = 0; i < numberOfPuzzles; i++) {
-      puzzleArray.push( Math.floor(Math.random() * (max - min + 1)) + min );
-    }
     
+    while( curPuzzle.length < numberOfPuzzles) {
+      var tmp = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    console.log(puzzleArray);
+      if(!curPuzzle.includes(tmp)) {
+        curPuzzle.push(tmp);
+      }
+    }
 
-    curPuzzle = puzzleArray;
+    console.log(curPuzzle);
   }
 
-  function addToInput() {
-    var dataNumber = $(this).data("number")
-      , value = DOM.$solutionInput.val() + dataNumber + " ";
+  function addToInput($el) {
+    var dataNumber = $el.data("number");
 
-    DOM.$solutionInput.val(value);
+    // check validation
+    // no same input, no more than 3 inputs allowed
 
-  }
-
-  function getInput() {
-    return DOM.$solutionInput.val();
+    if( userInput.length <= 3 && 
+        !userInput.includes(dataNumber) ) {
+      userInput.push(dataNumber);
+    }
   }
 
   function resetInputField(argument) {
@@ -126,7 +143,25 @@ var PokeApp = (function() {
 
   function compareInput() {
     console.log("cur: " + curPuzzle);
-    console.log("input: " + getInput());
+    console.log("input: " + userInput);
+
+    var l = curPuzzle.length
+      , res = false;
+
+    if(curPuzzle.length === userInput.length) {
+      
+      for (var i = curPuzzle.length - 1; i >= 0; i--) {
+        if (curPuzzle[i] === userInput[i]) {
+          res = true;
+        } else {
+          break;
+        }
+      }
+    }
+
+    console.log("result: " + res);
+
+    return res;
   }
 
   function setDragboxState() {

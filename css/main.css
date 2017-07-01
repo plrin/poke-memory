@@ -102,3 +102,41 @@ button {
   border: 1px solid black;
   width: 80px;
   margin: 5px auto 0; }
+
+.result-box {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 2; }
+
+.result-box__container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate3d(-50%, -50%, 0);
+  width: 100%;
+  max-width: 300px;
+  max-height: 150px;
+  background-color: white; }
+
+.result-box__text {
+  text-align: center;
+  padding: 10px 0; }
+  .result-box__text.right {
+    color: #63b598; }
+  .result-box__text.wrong {
+    color: #f8313a; }
+
+.result-box__close {
+  background-color: #d7e9ef;
+  width: 50%;
+  height: 50px;
+  text-align: center;
+  margin: 10px auto;
+  color: black;
+  line-height: 50px;
+  cursor: pointer; }
