@@ -18,6 +18,7 @@ var PokeApp = (function() {
     DOM.$boxOne = $("#drop-zone__box-one");
     DOM.$boxTwo = $("#drop-zone__box-two");
     DOM.$boxThree = $("#drop-zone__box-three");
+    DOM.$dropbox = $(".drop-zone__box");
   }
 
   // bind events
@@ -45,30 +46,39 @@ var PokeApp = (function() {
   }
 
   function _onResetButton() {
-    generateMemory();
+    resetGame();
     animateToOrigin();
   }
 
   function _onDragKey() {
     var $this = $(this);
-
-    animateToDropbox($this);
-    setDragboxState();
-
+    var curState = DOM.$generateButton.data("state");
+    // only allow animation, when game is started
+    if(curState == "check") {
+      animateToDropbox($this);
+      setDragboxState();
+    }
   }
 
 
   // functions
 
-  function resetPuzzle() {
-    generateMemory();
+  function resetGame() {
+
+    var curState = DOM.$generateButton.data("state");
+
+    if(curState == "check") {
+      DOM.$generateButton.data("state", "start").text("Start");
+    }
+
+    curPuzzle = [];
   }
 
   function setCheckButton() {
     var curState = DOM.$generateButton.data("state");
 
     if(curState == "start") {
-      DOM.$generateButton.data("state", "replay").text("Check");
+      DOM.$generateButton.data("state", "check").text("Check");
     }
   }
 
@@ -190,10 +200,12 @@ var PokeApp = (function() {
     var x = res.x
       , y = res.y;
     
-    TweenMax.to($el.get(), 1, { x: x, y: y, ease:Power1.easeInOut });
+    TweenMax.to($el.get(), 1, { x: x, y: y, ease:Power1.easeIn });
   }
 
   function animateToOrigin() {
+    DOM.$dropbox.removeClass("check");
+
     TweenMax.to(DOM.$dragKey.get(), 1, { x: 0, y: 0, ease:Power1.easeInOut });
   }
 
