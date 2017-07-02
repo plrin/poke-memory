@@ -24,11 +24,11 @@ var PokeApp = (function() {
 
   // bind events
   function bindEvents() {
-    DOM.$generateButton.on("click touchend", _onStartButton);
-    DOM.$resetButton.on("click touchend", _onResetButton);
-    DOM.$replayButton.on("click touchend", _onReplayButton);
-    DOM.$dragKey.on("click touchend", _onDragKey);
-    DOM.$resultClose.on("click touchend", _onResultClose);
+    DOM.$generateButton.on("click", _onStartButton);
+    DOM.$resetButton.on("click", _onResetButton);
+    DOM.$replayButton.on("click", _onReplayButton);
+    DOM.$dragKey.on("click", _onDragKey);
+    DOM.$resultClose.on("click", _onResultClose);
   }
 
   // set element click function
