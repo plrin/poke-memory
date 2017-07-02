@@ -1,0 +1,33 @@
+// usage:
+// @include mq($viewports: (1 2)) {
+//   background-color: blue;
+// }
+
+@mixin mq($viewports) {
+
+  $length: length($viewports);
+
+  // predefined viewports
+  $sm: "(max-width: 749px)";
+  $md: "(min-width: 750px) and (max-width: 1199px)";
+  $lg: "(min-width: 1200px) and (max-width: 1919px)";
+  $xl: "(min-width: 1920px)";
+
+  @for $i from 1 through $length {
+
+    $viewport: nth($viewports, $i);
+
+    @if $viewport == 0 {
+      @media only screen and #{$sm} { @content; }
+    }
+    @if $viewport == 1 {
+      @media only screen and #{$md} { @content; }
+    }
+    @else if $viewport == 2 {
+      @media only screen and #{$lg} { @content; }
+    }
+    @else if $viewport == 3 {
+      @media only screen and #{$xl} { @content; }
+    }
+  }
+}
